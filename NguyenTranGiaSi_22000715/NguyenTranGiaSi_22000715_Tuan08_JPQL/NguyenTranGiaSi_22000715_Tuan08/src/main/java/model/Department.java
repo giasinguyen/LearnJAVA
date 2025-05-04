@@ -29,5 +29,4 @@ public class Department implements Serializable{
 	@Column(name="Administrator")
 	private int administrator;
 	
-
 }

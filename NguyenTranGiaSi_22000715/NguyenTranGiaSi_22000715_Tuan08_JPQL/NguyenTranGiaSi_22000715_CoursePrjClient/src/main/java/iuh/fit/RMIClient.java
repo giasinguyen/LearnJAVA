@@ -13,8 +13,8 @@ public class RMIClient {
 
         Context context = new InitialContext();
 
-        StudentService studentService = (StudentService) context.lookup("rmi://H51M07:715/studentService");
-        DepartmentService departmentService = (DepartmentService) context.lookup("rmi://H51M07:715/departmentService");
+        StudentService studentService = (StudentService) context.lookup("rmi://localhost:715/studentService");
+        DepartmentService departmentService = (DepartmentService) context.lookup("rmi://localhost:715/departmentService");
 
         departmentService.getNumberOfStudentsByDepartment()
                 .entrySet()

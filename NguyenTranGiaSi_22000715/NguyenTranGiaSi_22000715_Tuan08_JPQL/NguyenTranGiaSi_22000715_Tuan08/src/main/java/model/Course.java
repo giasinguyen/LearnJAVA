@@ -33,6 +33,5 @@ public abstract class Course implements Serializable{
 
 	@ManyToMany(mappedBy = "courses")
 	protected Set<Instructor> instructors;
-	
 
 }

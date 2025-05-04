@@ -29,8 +29,8 @@ public class RMIServer {
         StudentService studentService = new StudentServiceImpl(studentDAO); //studentService: Java Remote Object
         DepartmentService departmentService = new DepartmentServiceImpl(departmentDAO);
 
-        context.bind("rmi://H51M07:715/studentService", studentService);
-        context.bind("rmi://H51M07:715/departmentService", departmentService);
+        context.bind("rmi://localhost:715/studentService", studentService);
+        context.bind("rmi://localhost:715/departmentService", departmentService);
 
         System.out.println("RMI server is running...");
 
