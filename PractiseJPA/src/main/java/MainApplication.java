@@ -1,6 +1,8 @@
+import dao.impl.DepartmentDAOImpl;
 import dao.impl.StudentDAOImpl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
+import models.Department;
 import models.Student;
 
 import java.time.LocalDateTime;
@@ -24,30 +26,43 @@ public class MainApplication {
 //            System.out.println("Error");
 //        }
 
-        StudentDAOImpl studentDAO = new StudentDAOImpl(em, Student.class);
-        Map<Student, Double> averageScoreOfStudents = studentDAO.getAverageScoreOfStudents();
-        for (Map.Entry<Student, Double> entry : averageScoreOfStudents.entrySet()) {
-            Student student = entry.getKey();
-            Double avgGrade = entry.getValue();
-            System.out.println(student);
+//        StudentDAOImpl studentDAO = new StudentDAOImpl(em, Student.class);
+//        Map<Student, Double> averageScoreOfStudents = studentDAO.getAverageScoreOfStudents();
+//        for (Map.Entry<Student, Double> entry : averageScoreOfStudents.entrySet()) {
+//            Student student = entry.getKey();
+//            Double avgGrade = entry.getValue();
+//            System.out.println(student);
+//        }
+//
+////        String courseName = "Macroeconomics";
+//        String courseName = "Quantitative";
+//
+//        List<Student> topStudents = studentDAO.listStudentsStudyingCourseWithHighestScore(courseName);
+//
+//        if (topStudents.isEmpty()) {
+//            System.out.println("No students found with grades in course: " + courseName);
+//        } else {
+//            System.out.println("Top students in course \"" + courseName + "\":");
+//            for (Student student : topStudents) {
+//                System.out.println("Student ID: " + student.getId() +
+//                        ", Name: " + student.getFirstName() + " " + student.getLastName());
+//            }
+//        }
+//
+//        em.close();
+
+        DepartmentDAOImpl departmentDAO = new DepartmentDAOImpl(em, Department.class);
+//        List<Department> departments = departmentDAO.findAll();
+//        for (Department department : departments) {
+//            System.out.println(department);
+//        }
+
+        Map<Department, Long> departmentLongMap = departmentDAO.getNumberOfStudentsByDepartment();
+        for (Map.Entry<Department, Long> entry : departmentLongMap.entrySet()) {
+            Department department = entry.getKey();
+            Long numberOfStudents = entry.getValue();
+            System.out.println(department);
+            System.out.println(numberOfStudents);
         }
-
-//        String courseName = "Macroeconomics";
-        String courseName = "Quantitative";
-
-        List<Student> topStudents = studentDAO.listStudentsStudyingCourseWithHighestScore(courseName);
-
-        if (topStudents.isEmpty()) {
-            System.out.println("No students found with grades in course: " + courseName);
-        } else {
-            System.out.println("Top students in course \"" + courseName + "\":");
-            for (Student student : topStudents) {
-                System.out.println("Student ID: " + student.getId() +
-                        ", Name: " + student.getFirstName() + " " + student.getLastName());
-            }
-        }
-
-        em.close();
-
     }
 }
