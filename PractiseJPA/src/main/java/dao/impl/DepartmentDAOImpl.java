@@ -22,24 +22,47 @@ public class DepartmentDAOImpl extends GenericDAOImpl<Department, Integer> imple
     @Override
     public List<Department> listDepartmentsWithoutStudents() {
         String query = "select d from Department d " +
-                "where d.id not in (select distinct c.id from Course c " +
-                "inner join StudentGrade sg on c.id = sg.id) ";
+                "where d.id not in (" +
+                "    select distinct c.department.id " +
+                "    from Course c " +
+                "    inner join StudentGrade sg on c.id = sg.course.id " +
+                "    where sg.student is not null" +
+                ")";
         return em.createQuery(query, Department.class).getResultList();
     }
 
+    //    @Override
+//    public Map<Department, Long> getNumberOfStudentsByDepartment() {
+//        String query = "select c.department, count(sg.student) as number " +
+//                "from Course c inner join StudentGrade sg " +
+//                "on c.id = sg.course.id " +
+//                "group by c.department " +
+//                "order by number desc ";
+//        return em.createQuery(query, Object[].class)
+//                .getResultList()
+//                .stream().collect(Collectors.toMap(
+//                        result -> (Department) result[0],
+//                        result -> (Long) result[1],
+//                        (a, b) -> a, LinkedHashMap::new
+//                ));
+//    }
+//
     @Override
     public Map<Department, Long> getNumberOfStudentsByDepartment() {
-        String query = "select c.department, count(sg.student) as number " +
+        String query = "select c.department, count(distinct sg.student) as number " +
                 "from Course c inner join StudentGrade sg " +
                 "on c.id = sg.course.id " +
                 "group by c.department " +
-                "order by number desc ";
+                "order by number desc";
+
         return em.createQuery(query, Object[].class)
                 .getResultList()
-                .stream().collect(Collectors.toMap(
+                .stream() //xu ly tuan tu
+                .collect(Collectors.toMap(
                         result -> (Department) result[0],
                         result -> (Long) result[1],
-                        (a, b) -> a, LinkedHashMap::new
+                        (a, b) -> a,
+                        LinkedHashMap::new
                 ));
     }
 

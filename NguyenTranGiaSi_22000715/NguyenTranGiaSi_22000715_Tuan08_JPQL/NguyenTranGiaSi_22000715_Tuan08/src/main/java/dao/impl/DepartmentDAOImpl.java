@@ -49,4 +49,6 @@ public class DepartmentDAOImpl extends GenericDAOImpl<Department, Integer> imple
                         LinkedHashMap::new
                 ));
     }
+
+
 }

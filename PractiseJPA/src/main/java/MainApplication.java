@@ -34,7 +34,7 @@ public class MainApplication {
 //            System.out.println(student);
 //        }
 //
-////        String courseName = "Macroeconomics";
+//      String courseName = "Macroeconomics";
 //        String courseName = "Quantitative";
 //
 //        List<Student> topStudents = studentDAO.listStudentsStudyingCourseWithHighestScore(courseName);
@@ -52,7 +52,7 @@ public class MainApplication {
 //        em.close();
 
         DepartmentDAOImpl departmentDAO = new DepartmentDAOImpl(em, Department.class);
-//        List<Department> departments = departmentDAO.findAll();
+//        List<Department> departments = departmentDAO.listDepartmentsWithoutStudents();
 //        for (Department department : departments) {
 //            System.out.println(department);
 //        }

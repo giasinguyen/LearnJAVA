@@ -259,3 +259,35 @@ inner join studentgrade sg on sg.CourseID = c.CourseID
 group by d.DepartmentID, d.Name, d.Administrator, d.Budget, d.StartDate
 order by number desc;
 
+SELECT d.DepartmentID, d.Name, COUNT(DISTINCT sg.StudentID) AS number
+FROM Department d
+         INNER JOIN Course c ON c.DepartmentID = d.DepartmentID
+         INNER JOIN StudentGrade sg ON sg.CourseID = c.CourseID
+GROUP BY d.DepartmentID, d.Name
+ORDER BY number DESC;
+
+# listDepartmentsWithoutStudents
+SELECT d.*
+FROM Department d
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM Course c
+             INNER JOIN StudentGrade sg ON c.CourseID = sg.CourseID
+    WHERE c.DepartmentID = d.DepartmentID
+);
+
+SELECT d.*
+FROM Department d
+WHERE d.DepartmentID NOT IN (
+    SELECT DISTINCT c.DepartmentID
+    FROM Course c
+             INNER JOIN StudentGrade sg ON c.CourseID = sg.CourseID
+    WHERE sg.StudentID IS NOT NULL
+);
+
+SELECT d.DepartmentID, d.Name, COUNT(DISTINCT sg.StudentID) AS number
+FROM Department d
+         INNER JOIN Course c ON d.DepartmentID = c.DepartmentID
+         INNER JOIN StudentGrade sg ON c.CourseID = sg.CourseID
+GROUP BY d.DepartmentID, d.Name
+ORDER BY number DESC;
