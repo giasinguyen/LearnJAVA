@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+
 @Getter
 @Setter
 @ToString(callSuper = true)
@@ -11,7 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "customers",indexes = {
+@Table(name = "customers", indexes = {
         @Index(name = "idx_customer_first_name", columnList = "first_name"),
         @Index(name = "idx_customer_email", columnList = "email"),
         @Index(name = "idx_customer_phone", columnList = "phone")
@@ -26,6 +27,7 @@ public class Customer extends Person implements Serializable {
     @Embedded
     private Address address;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "customer")
     private java.util.List<Order> orders;
 

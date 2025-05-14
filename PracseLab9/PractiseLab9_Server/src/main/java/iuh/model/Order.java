@@ -37,10 +37,12 @@ public class Order implements Serializable {
     @Column(name = "shipped_date")
     private LocalDate shippedDate;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "staff_id")
     private Staff staff;

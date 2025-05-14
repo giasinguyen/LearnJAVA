@@ -32,6 +32,7 @@ public class Product implements Serializable {
     @Column(name = "list_price")
     private double listPrice;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "product")
     private List<OrderItem> orderItems;
     @ToString.Exclude
