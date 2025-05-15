@@ -44,6 +44,7 @@ public class CustomerDAO extends GenericDAO<Customer, Integer> {
         return customersByState;
     }
 
+
     public static void main(String[] args) {
         CustomerDAO customerDAO = new CustomerDAO(Customer.class);
         Customer customer = customerDAO.findById(1);
