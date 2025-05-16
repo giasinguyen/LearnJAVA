@@ -22,6 +22,7 @@ import java.util.Set;
 public class Student extends Person implements Serializable {
     private LocalDateTime enrollmentDate;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "student")
     private Set<StudentGrade> studentGrades;
 

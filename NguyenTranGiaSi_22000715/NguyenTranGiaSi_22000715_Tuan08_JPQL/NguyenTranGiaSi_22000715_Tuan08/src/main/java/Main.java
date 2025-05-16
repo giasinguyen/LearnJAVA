@@ -9,6 +9,8 @@ import model.Student;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.hibernate.internal.util.collections.ArrayHelper.forEach;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -41,20 +43,21 @@ public class Main {
 //
 //        em.close();
         StudentDAOImpl studentDAO = new StudentDAOImpl(em, Student.class);
+        studentDAO.getAverageScoreOfStudents().forEach((k, v) -> System.out.println(k + " : " + v));
 //        String courseName = "Macroeconomics";
-        String courseName = "Quantitative";
-
-        List<Student> topStudents = studentDAO.listStudentsStudyingCourseWithHighestScore(courseName);
-
-        if (topStudents.isEmpty()) {
-            System.out.println("No students found with grades in course: " + courseName);
-        } else {
-            System.out.println("Top students in course \"" + courseName + "\":");
-            for (Student student : topStudents) {
-                System.out.println("Student ID: " + student.getId() +
-                        ", Name: " + student.getFirstName() + " " + student.getLastName());
-            }
-        }
+//        String courseName = "Quantitative";
+//
+//        List<Student> topStudents = studentDAO.listStudentsStudyingCourseWithHighestScore(courseName);
+//
+//        if (topStudents.isEmpty()) {
+//            System.out.println("No students found with grades in course: " + courseName);
+//        } else {
+//            System.out.println("Top students in course \"" + courseName + "\":");
+//            for (Student student : topStudents) {
+//                System.out.println("Student ID: " + student.getId() +
+//                        ", Name: " + student.getFirstName() + " " + student.getLastName());
+//            }
+//        }
 
         em.close();
     }

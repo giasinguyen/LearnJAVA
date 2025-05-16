@@ -1,32 +1,32 @@
 package model;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
+@NoArgsConstructor
+@Setter
+@Getter
+@ToString
 
 @Entity
-@Table(name = "Department")
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-public class Department implements java.io.Serializable {
-    @Column(name = "DepartmentID")
+public class Department implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="DepartmentID")
     private int id;
-    @Column(name = "Name")
+    @Column(name="Name", columnDefinition = "nvarchar(50)")
     private String name;
-    @Column(name = "Administrator")
-    private int administrator;
-    @Column(name = "Budget")
+    @Column(name="Budget")
     private double budget;
-    @Column(name = "StartDate")
+    @Column(name="StartDate")
     private LocalDateTime startDate;
-
+    @Column(name="Administrator")
+    private int administrator;
 
 }
