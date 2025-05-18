@@ -21,5 +21,8 @@ public class Main {
 //        em.persist(student);
 //
 //        tr.commit();
+
+//        System.out.println("Student saved successfully"); 
+
     }
 }

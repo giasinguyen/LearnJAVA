@@ -1,4 +1,5 @@
 import dao.CustomerDAO;
+import dao.OrderDetailDAO;
 import dao.ProductDAO;
 import jakarta.persistence.EntityManager;
 import model.Customer;
@@ -14,5 +15,8 @@ public class Main {
 
         CustomerDAO customerDAO = new CustomerDAO(em, Customer.class);
         customerDAO.getNumberCustomerByState().forEach((k, v) -> System.out.println(k + " : " + v));
+
+        OrderDetailDAO orderDetailDAO = new OrderDetailDAO(em, model.OrderItem.class);
+        System.out.println(orderDetailDAO.getOrderTotalAmountByID(1));
     }
 }

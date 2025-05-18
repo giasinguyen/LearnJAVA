@@ -30,7 +30,8 @@ public class StudentDAOImpl extends GenericDAOImpl<Student, Integer> implements 
                 .stream()
                 .collect(Collectors.toMap(
                         result -> (Student) result[0],
-                        result -> (Double) result[1]
+                        result -> (Double) result[1],
+                        (existing, replacement) -> existing, LinkedHashMap::new
                 ));
     }
 
