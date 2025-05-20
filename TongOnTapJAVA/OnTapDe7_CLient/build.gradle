@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+group 'iuh.fit'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.11.0'
+}
+
+sourceCompatibility = '23'
+targetCompatibility = '23'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+
+    implementation(files("libs/GiaSi.jar"))
+    implementation("org.mariadb.jdbc:mariadb-java-client:3.5.3")
+    compileOnly("org.projectlombok:lombok:1.18.36")
+    annotationProcessor("org.projectlombok:lombok:1.18.36")
+
+    implementation 'org.hibernate:hibernate-core:5.6.15.Final'
+
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
+test {
+    useJUnitPlatform()
+}

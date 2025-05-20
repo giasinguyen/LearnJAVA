@@ -23,6 +23,7 @@ public abstract class Book implements java.io.Serializable {
     private int numberOfPages;
     private double price;
 
+    @ToString.Exclude
     @ElementCollection
     @CollectionTable(name = "books_authors",
             joinColumns = @JoinColumn(name = "ISBN"),

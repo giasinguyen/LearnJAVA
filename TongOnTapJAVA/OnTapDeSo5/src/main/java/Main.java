@@ -5,11 +5,13 @@ import jakarta.persistence.Persistence;
 import model.Level;
 import model.Question;
 import model.Quiz;
+import util.JPAUtil;
+
+import java.rmi.RemoteException;
 
 public class Main {
-    public static void main(String[] args) {
-        EntityManager em = Persistence.createEntityManagerFactory("mariadb-pu")
-                .createEntityManager();
+    public static void main(String[] args) throws RemoteException {
+        EntityManager em = JPAUtil.getEntityManager();
 
         QuestionDAO questionDAO = new QuestionDAO(em, Question.class);
         questionDAO.listQuestionsByLevelAndCategory("Movies", Level.HARD).forEach(System.out::println);

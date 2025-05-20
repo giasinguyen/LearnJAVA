@@ -1,4 +1,6 @@
 package dao;
 
-public interface IQuizDAO {
+import java.rmi.Remote;
+
+public interface IQuizDAO extends Remote {
 }

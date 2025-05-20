@@ -4,15 +4,17 @@ import jakarta.persistence.EntityManager;
 import model.Level;
 import model.Quiz;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class QuizDAO extends GenericDAO<Quiz, String> {
-    public QuizDAO(Class<Quiz> clazz) {
+public class QuizDAO extends GenericDAO<Quiz, String> implements IQuizDAO {
+    public QuizDAO(Class<Quiz> clazz) throws RemoteException {
         super(clazz);
     }
 
-    public QuizDAO(EntityManager em, Class<Quiz> clazz) {
+    public QuizDAO(EntityManager em, Class<Quiz> clazz) throws RemoteException{
         super(em, clazz);
     }
 
@@ -20,7 +22,7 @@ public class QuizDAO extends GenericDAO<Quiz, String> {
 //(quiz) nào đó khi biết mã số bài trắc nghiệm, kết quả sắp xếp giảm dần theo số lượng câu hỏi.
 // + countQuestionsByLevelInQuiz(quizId: String): Map<Level, Long>
 
-    public Map<Level, Long> countQuestionsByLevelInQuiz(String quizId) {
+    public Map<Level, Long> countQuestionsByLevelInQuiz(String quizId) throws RemoteException{
         String query = "SELECT q.questionLevel, COUNT(q) " +
                 "FROM Quiz qz " +
                 "JOIN qz.questions q " +
